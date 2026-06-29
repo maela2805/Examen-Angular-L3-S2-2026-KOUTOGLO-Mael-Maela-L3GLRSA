@@ -51,11 +51,11 @@ export class WalletApiService {
   }
 
   consulterWallet(phoneNumber: string): Observable<Wallet> {
-    return this.http.get<Wallet>(`${this.BASE_URL}/${phoneNumber}`);
+    return this.http.get<Wallet>(`${this.BASE_URL}/${encodeURIComponent(phoneNumber)}`);
   }
 
   consulterSolde(phoneNumber: string): Observable<{ phoneNumber: string; balance: number }> {
-    return this.http.get<{ phoneNumber: string; balance: number }>(`${this.BASE_URL}/${phoneNumber}/balance`);
+    return this.http.get<{ phoneNumber: string; balance: number }>(`${this.BASE_URL}/${encodeURIComponent(phoneNumber)}/balance`);
   }
 
   effectuerDepot(id: number, amount: number, paymentMethod: string): Observable<string> {
@@ -71,7 +71,7 @@ export class WalletApiService {
   }
 
   listerTransactions(phoneNumber: string): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.BASE_URL}/${phoneNumber}/transactions`);
+    return this.http.get<Transaction[]>(`${this.BASE_URL}/${encodeURIComponent(phoneNumber)}/transactions`);
   }
 
   seeder(numWallets: number, eventsPerWallet: number): Observable<string> {
