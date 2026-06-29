@@ -166,8 +166,9 @@ export class TransferComponent {
 
     this.isLoading = true;
     const { destination, amount } = this.transferForm.value;
+    const normalizedDestination = destination.replace(/\s+/g, '');
 
-    this.walletApi.effectuerTransfert(senderPhone, destination, amount).subscribe({
+    this.walletApi.effectuerTransfert(senderPhone, normalizedDestination, amount).subscribe({
       next: () => {
         this.isLoading = false;
         this.store.refreshActiveWallet();
@@ -176,7 +177,9 @@ export class TransferComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        const msg = err?.error?.message || 'Erreur lors du transfert. Vérifiez les soldes.';
+        const msg = (typeof err?.error === 'string' && err.error)
+          ? err.error
+          : err?.error?.message || 'Solde insuffisant (pensez aux frais de 1% appliqués sur le montant).';
         this.toast.error(msg);
       }
     });
