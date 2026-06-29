@@ -35,7 +35,7 @@ export interface Page<T> {
   providedIn: 'root'
 })
 export class WalletApiService {
-  private readonly BASE_URL = 'http://localhost:8080/api/wallets';
+  private readonly BASE_URL = '/api/wallets';
 
   constructor(private http: HttpClient) {}
 

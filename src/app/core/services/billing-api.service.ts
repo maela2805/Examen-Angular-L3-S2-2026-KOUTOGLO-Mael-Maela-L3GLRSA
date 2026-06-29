@@ -16,8 +16,8 @@ export interface Facture {
   providedIn: 'root'
 })
 export class BillingApiService {
-  private readonly BASE_EXTERNAL = 'http://localhost:8080/api/external/factures';
-  private readonly BASE_PAY = 'http://localhost:8080/api/wallets';
+  private readonly BASE_EXTERNAL = '/api/external/factures';
+  private readonly BASE_PAY = '/api/wallets';
 
   constructor(private http: HttpClient) {}
 
