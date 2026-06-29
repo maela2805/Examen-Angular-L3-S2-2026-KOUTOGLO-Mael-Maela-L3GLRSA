@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+@if (store.currentRole() === null) {
+  <router-outlet></router-outlet>
+} @else {
+  <div class="app-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+      <app-header></app-header>
+      <main class="page-body">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+}
+
+<div class="toast-container">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div class="toast-item" [class]="toast.type">
+      <div class="toast-content">
+        {{ toast.message }}
+      </div>
+      <button (click)="toastService.dismiss(toast.id)" class="toast-close-btn">&times;</button>
+    </div>
+  }
+</div>
